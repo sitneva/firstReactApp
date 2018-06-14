@@ -60,32 +60,44 @@ class App extends Component {
 
 
   render() {
-        const style = {
-            backgroundColor: 'white',
-            font: 'inherit',
-            border: '1px solid blue',
-            padding:'8px',
-            cursor: 'pointer'
-        }
-        let persons = null;
-        if (this.state.showPersons) {
-            persons = (
-                <div>
-                    {this.state.persons.map((person, index) => {
-                        return  <Person
-                            click={() => this.deletePersonHandler(index)}
-                            name={person.name}
-                            age={person.age}
-                            key={person.id}
-                            changed = {(event) => this.nameChangeHandler(event, person.id)}
-                        ></Person>
-                    })}
-                </div>
-            )
-        }
+    const style = {
+        backgroundColor: 'white',
+        font: 'inherit',
+        border: '1px solid blue',
+        padding:'8px',
+        cursor: 'pointer'
+    }
+    let persons = null;
+    if (this.state.showPersons) {
+        persons = (
+            <div>
+                {this.state.persons.map((person, index) => {
+                    return  <Person
+                        click={() => this.deletePersonHandler(index)}
+                        name={person.name}
+                        age={person.age}
+                        key={person.id}
+                        changed = {(event) => this.nameChangeHandler(event, person.id)}
+                    ></Person>
+                })}
+            </div>
+        );
+
+        style.backgroundColor = 'red';
+    }
+
+    let classes = [];
+    if(this.state.persons.length <= 2) {
+        classes.push('red');
+    }
+    if(this.state.persons.length <= 1) {
+        classes.push('bold')
+    }
+
     return (
       <div className="App">
           <h1>My react app</h1>
+          <p className={classes.join(' ')}>Test texts with dunamic texts</p>
           <button
               style = {style}
               onClick={this.toggleShowPersonsHandler}>Show people</button>
