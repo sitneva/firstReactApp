@@ -9,6 +9,7 @@ class Person extends PureComponent {
     constructor(props) {
         super(props);
         console.log('[Person.js] Inside Constructor', props);
+        this.inputElement = React.createRef();
     }
 
     componentWillMount(){
@@ -17,12 +18,16 @@ class Person extends PureComponent {
     componentDidMount() {
         console.log('[Person.js] Inside componentDidMount()');
         if (this.props.position === 0 ){
-            this.inputElement.focus();
+            this.inputElement.current.focus();
         }
 
     }
     componentWillReceiveProps (nextProps) {
         console.log('[UPDATE Person.js] Inside componentWillReceiveProps()', nextProps);
+    }
+
+    focus() {
+        this.inputElement.current.focus();
     }
     /*shouldComponentUpdate (nextProps, nextState){
         console.log('[UPDATE Person.js] Inside shouldComponentUpdate()', nextProps, nextState);
@@ -45,7 +50,7 @@ class Person extends PureComponent {
                 <p onClick={this.props.click}>Hi, I am {this.props.name} and I am {this.props.age}</p>
                 <p>{this.props.children}</p>
                 <input
-                    ref={(inp) => {this.inputElement = inp}}
+                    ref={this.inputElement}
                     type="text"
                     onChange={this.props.changed}
                     value={this.props.name}/>
