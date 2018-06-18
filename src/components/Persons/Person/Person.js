@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import classes from './Person.css';
-import WithClass from '../../../hoc/WithClass';
+import withClass from '../../../hoc/withClass';
+import myAux from '../../../hoc/MyAux';
 
 class Person extends PureComponent {
     constructor(props) {
@@ -34,14 +35,14 @@ class Person extends PureComponent {
     render () {
         console.log('[Person.js] Inside render()');
         return (
-            <WithClass classes={classes.Person}>
+            <myAux>
                 <p onClick={this.props.click}>Hi, I am {this.props.name} and I am {this.props.age}</p>
                 <p>{this.props.children}</p>
                 <input type="text" onChange={this.props.changed} value={this.props.name}/>
-            </WithClass>
+            </myAux>
         )
     }
 }
 
 
-export default Person;
+export default withClass(Person, classes.Person);

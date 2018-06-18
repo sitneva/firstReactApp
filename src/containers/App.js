@@ -3,7 +3,8 @@ import classes from './App.css';
 import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import withClass from '../hoc/withClass';
+import myAux from '../hoc/MyAux'
 
 class App extends PureComponent {
     constructor(props) {
@@ -108,7 +109,7 @@ class App extends PureComponent {
         }
 
         return (
-              <WithClass classes={classes.App}>
+              <myAux>
                   <button onClick={() => {this.setState({showPersons: true})}}>Show persons</button>
                    <Cockpit
                        appTitle = {this.props.title}
@@ -117,9 +118,9 @@ class App extends PureComponent {
                        clicked={this.toggleShowPersonsHandler}
                    />
                   {persons}
-              </WithClass>
+              </myAux>
         );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
