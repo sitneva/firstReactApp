@@ -4,7 +4,7 @@ import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
-import myAux from '../hoc/MyAux'
+import MyAux from '../hoc/MyAux'
 
 class App extends PureComponent {
     constructor(props) {
@@ -56,7 +56,7 @@ class App extends PureComponent {
             persons: [
                 {id:'1',name: newName, age: 18},
                 {id:'2',name: 'Ira', age: 220},
-                {id:'3',name: 'Ted', age: 34},
+                {id:'3',name: 'Ted', age: '34'},
             ]
         })
     }
@@ -115,7 +115,7 @@ class App extends PureComponent {
         }
 
         return (
-              <myAux>
+              <MyAux>
                   <button onClick={() => {this.setState({showPersons: true})}}>Show persons</button>
                    <Cockpit
                        appTitle = {this.props.title}
@@ -124,7 +124,7 @@ class App extends PureComponent {
                        clicked={this.toggleShowPersonsHandler}
                    />
                   {persons}
-              </myAux>
+              </MyAux>
         );
   }
 }

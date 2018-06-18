@@ -18,6 +18,7 @@ class Persons extends Component {
         console.log('[Persons.js] Inside render()');
         return this.props.persons.map((person, index) => {
             return <Person
+                position={index}
                 click={() => this.props.clicked(index)}
                 name={person.name}
                 age={person.age}
