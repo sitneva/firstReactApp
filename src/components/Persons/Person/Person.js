@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import classes from './Person.css';
+import WithClass from '../../../hoc/WithClass';
 
-class Person extends Component {
+class Person extends PureComponent {
     constructor(props) {
         super(props);
         console.log('[Person.js] Inside Constructor', props);
@@ -16,11 +17,13 @@ class Person extends Component {
     componentWillReceiveProps (nextProps) {
         console.log('[UPDATE Person.js] Inside componentWillReceiveProps()', nextProps);
     }
-    shouldComponentUpdate (nextProps, nextState){
+    /*shouldComponentUpdate (nextProps, nextState){
         console.log('[UPDATE Person.js] Inside shouldComponentUpdate()', nextProps, nextState);
-        //return nextProps.persons !== this.props.persons;
-        return true;
-    }
+        return nextProps.persons !== this.props.persons ||
+                nextProps.changed !== this.props.changed ||
+                nextProps.click !== this.props.click;
+        //return true;
+    }*/
     componentWillUpdate (nextProps, nextState) {
         console.log('[UPDATE Person.js] Inside componentWillUpdate()', nextProps, nextState);
     }
@@ -31,11 +34,11 @@ class Person extends Component {
     render () {
         console.log('[Person.js] Inside render()');
         return (
-            <div className={classes.Person}>
+            <WithClass classes={classes.Person}>
                 <p onClick={this.props.click}>Hi, I am {this.props.name} and I am {this.props.age}</p>
                 <p>{this.props.children}</p>
                 <input type="text" onChange={this.props.changed} value={this.props.name}/>
-            </div>
+            </WithClass>
         )
     }
 }
